@@ -1,0 +1,40 @@
+{
+  "name": "knock-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --exit-child src/index.ts",
+    "start": "ts-node src/index.ts",
+    "build": "tsc",
+    "test": "mocha --require ts-node/register test/**/*.test.ts"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/chai": "^4.3.12",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.24",
+    "chai": "^4.1.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^10.3.0",
+    "nock": "^13.5.4",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@types/chai-as-promised": "^7.1.8",
+    "axios": "^1.6.7",
+    "jsonschema": "^1.4.1",
+    "typescript-json-schema": "^0.63.0"
+  }
+}
