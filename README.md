@@ -20,7 +20,7 @@ I also added a `closed` column to the `deal` table.  This would just be another 
 This is where my confidence ended though - thinking of tracking all of the changes that happened to a deal over time is definitely a challenge for me.  One idea I had was to use a `trigger` anytime a `deal` gets assigned a role, which could write the change to another table in the database.  
 
 
-## Question 2
+## Question 2 (src/problem2.ts and src/mls for configs)
 Reading betweent he lines, I think the key here was to optmize the system to be able to easily add different data MLS structures as time goes on.  I elected to give each MLS type a `config` that has a JSON schema used for input validation, as well as a `mapper` function which mapped that (validated) value to the request structure that the CRM `POST` request was expecting.  So, theoretically, if more MLS structures pop up in the future, you just have to create a `mapper` function and a JSON schema.  Ultimately I felt the JSON schema validation was necessary in case MLS structures have some common fields with others.  It must satisfy a schema completely - and when it does, we know that we can safely map to the expected input value.  I used a neat tool called `typescript-json-schema` to generate JSON schemas from TypeScript definitions (way easier than writing JSON schema by hand). Ultimately, scripting with that to create template `ts` files for new schemas would be slick.
 
 I made some assumptions during this:
@@ -29,7 +29,7 @@ I made some assumptions during this:
 3. In both `a` and `b`, even the completely numeric fields were strings. I assumed this was intentional so I parsed any value that needed to be a number.
 4.  I'm not sure in this exercise how much control we have over the CRM endpoint's request body, but if I could I would definitely change `zip` to be a string and not a number.  Leading `0`s can cause parsing problems. 
 
-## Question 3
+## Question 3 (src/problem3.ts)
 This was a fun one to think about, and I resorted to a bit of recursion to get the job done.  In my opinion it's a clean way of handling that, and I'm definitely someone who appreciates functional programming. 
 
 ## Question 4
