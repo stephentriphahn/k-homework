@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Validator } from 'jsonschema'
-import { mlsAConfig } from './mls/mlsA'
-import { mlsBConfig } from './mls/mlsB'
+import { gaFmlsConfig } from './mls/gaFmls'
+import { ncscCmlsConfig } from './mls/ncscCmls'
 
 export interface CRMRequestBody {
   mls_name: string
@@ -21,12 +21,12 @@ export interface CRMRequestBody {
 export interface MLSConfig {
   schema: any
   idField: string
-  transorm: (v: JSON) => CRMRequestBody
+  mapper: (v: any) => CRMRequestBody
 }
 
 const validator = new Validator()
 
-const mlsConfig = [mlsAConfig, mlsBConfig]
+const mlsConfig: MLSConfig[] = [gaFmlsConfig, ncscCmlsConfig]
 
 export async function postToCrm(value: any) {
   for (const c of mlsConfig) {
@@ -39,5 +39,5 @@ export async function postToCrm(value: any) {
     )
     return { status, data }
   }
-  throw Error('MLS data does not satisy any configured schemas.')
+  throw Error('provided MLS data does not satisy any configured schemas.')
 }

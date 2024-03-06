@@ -75,7 +75,7 @@ describe('postToCrm', () => {
     )
   })
 
-  it('rejects an invalid Mls input', async () => {
+  it('rejects a (mostly) valid Mls input', async () => {
     // value is very close to being valid, but typo in vendor_id
     const value = { ...mlsA, vendor_id: undefined, vndr_id: mlsA.vendor_id }
     const r = postToCrm(value)

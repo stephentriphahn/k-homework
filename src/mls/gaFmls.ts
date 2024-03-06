@@ -1,6 +1,6 @@
 import { CRMRequestBody } from "../problem2"
 
-export const mlsA: any = {
+export const gaFmls = {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "properties": {
         "address_components": {
@@ -87,7 +87,7 @@ export const mlsA: any = {
 
 
 
-export function mlsAMapper(mls: any): CRMRequestBody {
+export function gaFmlsMapper(mls: any): CRMRequestBody {
     const addr_comp = mls.address_components
     return {
         mls_name: mls.data_name,
@@ -95,6 +95,8 @@ export function mlsAMapper(mls: any): CRMRequestBody {
         street_address: `${addr_comp.street_number} ${addr_comp.street_name} ${addr_comp.street_suffix}`,
         city: addr_comp.city,
         state: addr_comp.state,
+        // WARNING - parsing a zip code that starts with 0 will result in a wrong zip, ie 00276 -> 276
+        // I recommend changing zip code to a string value if the service allows it
         zip_code: parseInt(addr_comp.zipcode),
         list_price: parseInt(mls.list.replace(/[^0-9.-]+/g, '')),
         list_date: new Date(mls.date).getTime(),
@@ -105,8 +107,8 @@ export function mlsAMapper(mls: any): CRMRequestBody {
     }
 }
 
-export const mlsAConfig = {
-    schema: mlsA,
-    mapper: mlsAMapper,
+export const gaFmlsConfig = {
+    schema: gaFmls,
+    mapper: gaFmlsMapper,
     idField: 'vendor_id'
 }

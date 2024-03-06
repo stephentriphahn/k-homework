@@ -1,6 +1,6 @@
 import { CRMRequestBody } from "../problem2"
 
-export const mlsB: any = {
+export const ncscCmls: any = {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "properties": {
         "created": {
@@ -69,13 +69,15 @@ export const mlsB: any = {
     "type": "object"
 }
 
-export function mlsBMapper(mls: any): CRMRequestBody {
+export function ncscCmlsMapper(mls: any): CRMRequestBody {
     return {
         mls_name: mls.name,
         mls_id: mls.id,
         street_address: mls.geo.address,
         city: mls.geo.city,
         state: mls.geo.state,
+        // WARNING - parsing a zip code that starts with 0 will result in a wrong zip, ie 00276 -> 276
+        // I recommend changing zip code to a string value if the service allows it
         zip_code: parseInt(mls.geo.zip),
         list_price: parseInt(mls.listing.price.replace(/[^0-9.-]+/g, '')),
         list_date: new Date(mls.created).getTime(),
@@ -85,8 +87,8 @@ export function mlsBMapper(mls: any): CRMRequestBody {
     }
 }
 
-export const mlsBConfig = {
-    schema: mlsB,
-    mapper: mlsBMapper,
+export const ncscCmlsConfig = {
+    schema: ncscCmls,
+    mapper: ncscCmlsMapper,
     idField: 'id'
 }

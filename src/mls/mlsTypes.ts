@@ -1,4 +1,12 @@
-export interface MlsA {
+/**
+ * These interfaces are used to generate JSON schemas for example:
+ * ./node_modules/.bin/typescript-json-schema ./src/mlsTypes.ts GaFmls
+ * That prints the schema to stdout, so I just copied that into the config files
+ * Ideally, this would be handled more elegantly in a script
+ */
+
+
+export interface GaFmls {
   data_name: string
   vendor_id: string
   address_components: {
@@ -20,7 +28,7 @@ export interface MlsA {
   }
 }
 
-export interface MlsB {
+export interface NcscCmls {
   name: string
   id: string
   geo: {
@@ -37,3 +45,4 @@ export interface MlsB {
   }
   created: string
 }
+
